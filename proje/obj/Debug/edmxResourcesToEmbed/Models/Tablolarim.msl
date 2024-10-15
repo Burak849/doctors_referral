@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="viziteModelStoreContainer" CdmEntityContainer="viziteEntities">
+    <EntitySetMapping Name="doktortablo">
+      <EntityTypeMapping TypeName="viziteModel.doktortablo">
+        <MappingFragment StoreEntitySet="doktortablo">
+          <ScalarProperty Name="doktor_sicilno" ColumnName="doktor_sicilno" />
+          <ScalarProperty Name="doktor_ad" ColumnName="doktor_ad" />
+          <ScalarProperty Name="doktor_soyad" ColumnName="doktor_soyad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="kayitliamirtablo">
+      <EntityTypeMapping TypeName="viziteModel.kayitliamirtablo">
+        <MappingFragment StoreEntitySet="kayitliamirtablo">
+          <ScalarProperty Name="amir_sicilno" ColumnName="amir_sicilno" />
+          <ScalarProperty Name="amir_ad" ColumnName="amir_ad" />
+          <ScalarProperty Name="amir_soyad" ColumnName="amir_soyad" />
+          <ScalarProperty Name="departmanid" ColumnName="departmanid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="scanner">
+      <EntityTypeMapping TypeName="viziteModel.scanner">
+        <MappingFragment StoreEntitySet="scanner">
+          <ScalarProperty Name="sicilno" ColumnName="sicilno" />
+          <ScalarProperty Name="kartno" ColumnName="kartno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="temelcalisantablo">
+      <EntityTypeMapping TypeName="viziteModel.temelcalisantablo">
+        <MappingFragment StoreEntitySet="temelcalisantablo">
+          <ScalarProperty Name="sicilno" ColumnName="sicilno" />
+          <ScalarProperty Name="isim" ColumnName="isim" />
+          <ScalarProperty Name="soyisim" ColumnName="soyisim" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="yakakodu" ColumnName="yakakodu" />
+          <ScalarProperty Name="e_mail" ColumnName="e_mail" />
+          <ScalarProperty Name="departman" ColumnName="departman" />
+          <ScalarProperty Name="amirleri" ColumnName="amirleri" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vizitealanlartablo">
+      <EntityTypeMapping TypeName="viziteModel.vizitealanlartablo">
+        <MappingFragment StoreEntitySet="vizitealanlartablo">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sicilno" ColumnName="sicilno" />
+          <ScalarProperty Name="isim" ColumnName="isim" />
+          <ScalarProperty Name="soyisim" ColumnName="soyisim" />
+          <ScalarProperty Name="sevk_tarihi" ColumnName="sevk_tarihi" />
+          <ScalarProperty Name="sevk_saati" ColumnName="sevk_saati" />
+          <ScalarProperty Name="yakakodu" ColumnName="yakakodu" />
+          <ScalarProperty Name="durum" ColumnName="durum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="departmanlars">
+      <EntityTypeMapping TypeName="viziteModel.departmanlar">
+        <MappingFragment StoreEntitySet="departmanlar">
+          <ScalarProperty Name="departmanad" ColumnName="departmanad" />
+          <ScalarProperty Name="departmanid" ColumnName="departmanid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

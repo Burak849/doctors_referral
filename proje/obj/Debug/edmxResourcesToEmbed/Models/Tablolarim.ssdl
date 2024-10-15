@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="viziteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'vizite.dbo.departmanlar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="departmanlar">
+    <Key>
+      <PropertyRef Name="departmanid" />
+    </Key>
+    <Property Name="departmanid" Type="int" Nullable="false" />
+    <Property Name="departmanad" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'vizite.dbo.doktortablo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="doktortablo">
+    <Key>
+      <PropertyRef Name="doktor_sicilno" />
+    </Key>
+    <Property Name="doktor_sicilno" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="doktor_ad" Type="varchar" MaxLength="50" />
+    <Property Name="doktor_soyad" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'vizite.dbo.kayitliamirtablo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="kayitliamirtablo">
+    <Key>
+      <PropertyRef Name="amir_sicilno" />
+    </Key>
+    <Property Name="amir_sicilno" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="amir_ad" Type="varchar" MaxLength="50" />
+    <Property Name="amir_soyad" Type="varchar" MaxLength="50" />
+    <Property Name="departmanid" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'vizite.dbo.scanner' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="scanner">
+    <Key>
+      <PropertyRef Name="sicilno" />
+      <PropertyRef Name="kartno" />
+    </Key>
+    <Property Name="sicilno" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="kartno" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'vizite.dbo.temelcalisantablo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="temelcalisantablo">
+    <Key>
+      <PropertyRef Name="sicilno" />
+    </Key>
+    <Property Name="sicilno" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="isim" Type="varchar" MaxLength="50" />
+    <Property Name="soyisim" Type="varchar" MaxLength="50" />
+    <Property Name="tel" Type="varchar" MaxLength="50" />
+    <Property Name="yakakodu" Type="int" />
+    <Property Name="e_mail" Type="varchar" MaxLength="50" />
+    <Property Name="departman" Type="varchar" MaxLength="50" />
+    <Property Name="amirleri" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'vizite.dbo.vizitealanlartablo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vizitealanlartablo">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="sicilno" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sicilno" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="isim" Type="varchar" MaxLength="50" />
+    <Property Name="soyisim" Type="varchar" MaxLength="50" />
+    <Property Name="sevk_tarihi" Type="date" />
+    <Property Name="sevk_saati" Type="datetime2" Precision="7" />
+    <Property Name="yakakodu" Type="int" />
+    <Property Name="durum" Type="int" />
+  </EntityType>
+  <EntityContainer Name="viziteModelStoreContainer">
+    <EntitySet Name="departmanlar" EntityType="Self.departmanlar" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [departmanlar].[departmanid] AS [departmanid], 
+    [departmanlar].[departmanad] AS [departmanad]
+    FROM [dbo].[departmanlar] AS [departmanlar]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="doktortablo" EntityType="Self.doktortablo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [doktortablo].[doktor_sicilno] AS [doktor_sicilno], 
+    [doktortablo].[doktor_ad] AS [doktor_ad], 
+    [doktortablo].[doktor_soyad] AS [doktor_soyad]
+    FROM [dbo].[doktortablo] AS [doktortablo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="kayitliamirtablo" EntityType="Self.kayitliamirtablo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [kayitliamirtablo].[amir_sicilno] AS [amir_sicilno], 
+    [kayitliamirtablo].[amir_ad] AS [amir_ad], 
+    [kayitliamirtablo].[amir_soyad] AS [amir_soyad], 
+    [kayitliamirtablo].[departmanid] AS [departmanid]
+    FROM [dbo].[kayitliamirtablo] AS [kayitliamirtablo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="scanner" EntityType="Self.scanner" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [scanner].[sicilno] AS [sicilno], 
+    [scanner].[kartno] AS [kartno]
+    FROM [dbo].[scanner] AS [scanner]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="temelcalisantablo" EntityType="Self.temelcalisantablo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [temelcalisantablo].[sicilno] AS [sicilno], 
+    [temelcalisantablo].[isim] AS [isim], 
+    [temelcalisantablo].[soyisim] AS [soyisim], 
+    [temelcalisantablo].[tel] AS [tel], 
+    [temelcalisantablo].[yakakodu] AS [yakakodu], 
+    [temelcalisantablo].[e_mail] AS [e_mail], 
+    [temelcalisantablo].[departman] AS [departman], 
+    [temelcalisantablo].[amirleri] AS [amirleri]
+    FROM [dbo].[temelcalisantablo] AS [temelcalisantablo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vizitealanlartablo" EntityType="Self.vizitealanlartablo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vizitealanlartablo].[id] AS [id], 
+    [vizitealanlartablo].[sicilno] AS [sicilno], 
+    [vizitealanlartablo].[isim] AS [isim], 
+    [vizitealanlartablo].[soyisim] AS [soyisim], 
+    [vizitealanlartablo].[sevk_tarihi] AS [sevk_tarihi], 
+    [vizitealanlartablo].[sevk_saati] AS [sevk_saati], 
+    [vizitealanlartablo].[yakakodu] AS [yakakodu], 
+    [vizitealanlartablo].[durum] AS [durum]
+    FROM [dbo].[vizitealanlartablo] AS [vizitealanlartablo]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

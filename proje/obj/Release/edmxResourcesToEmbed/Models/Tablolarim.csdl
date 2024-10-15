@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="viziteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="amirtablo">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="sicilno" />
+      <PropertyRef Name="yakakodu" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sicilno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isim" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="soyisim" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="tel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="yakakodu" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="revirtablo">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="sicilno" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sicilno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isim" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="soyisim" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sevk_tarihi" Type="DateTime" Precision="0" />
+    <Property Name="sevk_saati" Type="DateTime" Precision="7" />
+    <Property Name="fotograf" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityContainer Name="viziteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="amirtabloes" EntityType="Self.amirtablo" />
+    <EntitySet Name="revirtabloes" EntityType="Self.revirtablo" />
+    <EntitySet Name="doktortabloes" EntityType="viziteModel.doktortablo" />
+    <EntitySet Name="kayitliamirtabloes" EntityType="viziteModel.kayitliamirtablo" />
+  </EntityContainer>
+  <EntityType Name="doktortablo">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="doktor_sicilno" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="doktor_sicilno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="doktor_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="doktor_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="kayitliamirtablo">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="amir_sicilno" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="amir_sicilno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="amir_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="amir_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

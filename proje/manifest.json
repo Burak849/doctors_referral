@@ -1,0 +1,15 @@
+﻿{
+  "name": "Vizite Sevk",
+  "short_name": "Vzt",
+  "start_url": "/localhost:44338/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/Images/doktas-alt.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

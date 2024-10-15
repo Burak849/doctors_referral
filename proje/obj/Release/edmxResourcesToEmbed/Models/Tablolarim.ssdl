@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="viziteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'vizite.dbo.amirtablo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="amirtablo">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="sicilno" />
+      <PropertyRef Name="yakakodu" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sicilno" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="isim" Type="varchar" MaxLength="50" />
+    <Property Name="soyisim" Type="varchar" MaxLength="50" />
+    <Property Name="tel" Type="varchar" MaxLength="11" />
+    <Property Name="yakakodu" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'vizite.dbo.doktortablo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="doktortablo">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="doktor_sicilno" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="doktor_sicilno" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="doktor_ad" Type="varchar" MaxLength="50" />
+    <Property Name="doktor_soyad" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'vizite.dbo.kayitliamirtablo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="kayitliamirtablo">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="amir_sicilno" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="amir_sicilno" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="amir_ad" Type="varchar" MaxLength="50" />
+    <Property Name="amir_soyad" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'vizite.dbo.revirtablo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="revirtablo">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="sicilno" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sicilno" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="isim" Type="varchar" MaxLength="50" />
+    <Property Name="soyisim" Type="varchar" MaxLength="50" />
+    <Property Name="sevk_tarihi" Type="date" />
+    <Property Name="sevk_saati" Type="datetime2" Precision="7" />
+    <Property Name="fotograf" Type="image" />
+  </EntityType>
+  <EntityContainer Name="viziteModelStoreContainer">
+    <EntitySet Name="amirtablo" EntityType="Self.amirtablo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [amirtablo].[id] AS [id], 
+    [amirtablo].[sicilno] AS [sicilno], 
+    [amirtablo].[isim] AS [isim], 
+    [amirtablo].[soyisim] AS [soyisim], 
+    [amirtablo].[tel] AS [tel], 
+    [amirtablo].[yakakodu] AS [yakakodu]
+    FROM [dbo].[amirtablo] AS [amirtablo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="doktortablo" EntityType="Self.doktortablo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [doktortablo].[id] AS [id], 
+    [doktortablo].[doktor_sicilno] AS [doktor_sicilno], 
+    [doktortablo].[doktor_ad] AS [doktor_ad], 
+    [doktortablo].[doktor_soyad] AS [doktor_soyad]
+    FROM [dbo].[doktortablo] AS [doktortablo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="kayitliamirtablo" EntityType="Self.kayitliamirtablo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [kayitliamirtablo].[id] AS [id], 
+    [kayitliamirtablo].[amir_sicilno] AS [amir_sicilno], 
+    [kayitliamirtablo].[amir_ad] AS [amir_ad], 
+    [kayitliamirtablo].[amir_soyad] AS [amir_soyad]
+    FROM [dbo].[kayitliamirtablo] AS [kayitliamirtablo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="revirtablo" EntityType="Self.revirtablo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [revirtablo].[id] AS [id], 
+    [revirtablo].[sicilno] AS [sicilno], 
+    [revirtablo].[isim] AS [isim], 
+    [revirtablo].[soyisim] AS [soyisim], 
+    [revirtablo].[sevk_tarihi] AS [sevk_tarihi], 
+    [revirtablo].[sevk_saati] AS [sevk_saati], 
+    [revirtablo].[fotograf] AS [fotograf]
+    FROM [dbo].[revirtablo] AS [revirtablo]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

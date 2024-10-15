@@ -1,0 +1,200 @@
+﻿@{
+    ViewData["Title"] = "Anasayfa";
+}
+@if (TempData["ShowAlert"] != null)
+{
+    <script>alert('İlerleyebilmek için giriş yapmalısınız.');</script>
+}
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<style>
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+        height: auto;
+        background-image: url('../../Images/background_image.jpg');
+        background-size: auto;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: column;
+    }
+
+    .container-content {
+        max-width: 100%;
+        height: auto;
+        text-align: center;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: column;
+    }
+
+    .backgroundcontainer {
+        max-width: 100%;
+        height: auto;
+        margin-top: 120px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        border-collapse: collapse;
+        overflow: hidden;
+        box-shadow: 0 5px 8px rgba(0, 0, 0, 1);
+        padding: 25px;
+    }
+
+    h3 {
+        margin-top: 30px;
+        text-align: center;
+        color: black;
+        font-weight: 500;
+        font-family: serif;
+    }
+
+    .btn {
+        text-align: center;
+        padding: 10px;
+        margin: 10px;
+        width: 200%;
+        height: auto;
+        font-size: 24px;
+        color: white;
+        border-radius: 10px;
+        border: 1px solid transparent;
+    }
+
+    hr {
+        margin: 10px 0;
+        border: 1px solid black;
+    }
+
+    .mb-3 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+        .mb-3 label {
+            margin-right: 10px;
+            min-width: 150px;
+            text-align: right;
+        }
+
+        .mb-3 input {
+            flex-grow: 1;
+        }
+
+    .btn-outline-danger, .btn-outline-success {
+        border: 1px solid transparent;
+    }
+</style>
+
+<div class="backgroundcontainer">
+    <h3><strong>Giriş Yapacağınız Paneli Seçiniz:</strong></h3>
+    <hr />
+
+    <div class="container">
+        <div class="container-content">
+
+            <button type="button" class="btn btn-primary btn-outline-success" data-bs-toggle="modal" data-bs-target="#revirModal">
+                Revir Paneli
+            </button>
+            @using (Html.BeginForm("DoktorKontrol", "Revir", FormMethod.Post))
+            {
+                <div class="modal fade" id="revirModal" tabindex="-1" aria-labelledby="revirModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="margin-top: 120px;">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="revirModalLabel" style="color:black;"><strong>Revir Paneli</strong></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="@Url.Action("DoktorKontrol", "Revir")">
+                                    <div class="mb-3">
+                                        <label for="revirSicilno" class="col-form-label" style="color:black;">Revir Kartno Giriniz:</label>
+                                        <input type="password" class="form-control" id="revirKartno" name="kartno" required>
+                                    </div>
+                                    <div class="modal-footer" style="flex-wrap: nowrap; align-items: center; justify-content:center;">
+                                        <input type="submit" class="btn btn-primary btn-outline-success" value="Giriş Yap" />
+                                        <button type="button" class="btn btn-secondary btn-outline-danger" data-bs-dismiss="modal">Kapat</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <button type="button" class="btn btn-secondary btn-outline-danger" data-bs-toggle="modal" data-bs-target="#amirModal">
+                Amir Paneli
+            </button>
+            @using (Html.BeginForm("CheckKartNo", "Amir", FormMethod.Post))
+            {
+                <div class="modal fade" id="amirModal" tabindex="-1" aria-labelledby="amirModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="margin-top: 120px;">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="amirModalLabel" style="color:black;"><strong>Amir Paneli</strong></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="@Url.Action("Index", "Amir")">
+
+
+                                    <div class="mb-3">
+                                        <label for="departman" class="col-form-label" style="color:black;">Departmanlar:</label>
+                                        <select class="form-select" id="departman" name="departman" required>
+                                            <option value="" disabled selected>Departmanınızı seçiniz</option>
+                                            <option value="1">IT</option>
+                                            <option value="2">İnsan Kaynakları</option>
+                                            <option value="3">Tamamlama</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="amirSicilno" class="col-form-label" style="color:black;">Amir Kartno Giriniz:</label>
+                                        <input type="password" class="form-control" id="amirKartno" name="kartno" required>
+                                    </div>
+                                    <div class="modal-footer" style="flex-wrap: nowrap; align-items: center; justify-content:center;">
+                                        <button type="submit" class="btn btn-primary btn-outline-success">Giriş Yap</button>
+                                        <button type="button" class="btn btn-secondary btn-outline-danger" data-bs-dismiss="modal">Kapat</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#revirModal').on('shown.bs.modal', function () {
+            $('#revirKartno').focus();
+        });
+
+        $('#amirModal').on('shown.bs.modal', function () {
+            $('#amirKartno').focus();
+        });
+    });
+</script>
+
+<div class="version-info" style="text-align: center; margin-top: 10px; color: white;">
+    <p>Versiyon: 1.0.1</p>
+</div>

@@ -1,0 +1,500 @@
+﻿
+@{
+    ViewData["Title"] = "Revir Formu";
+}
+@if (TempData["ShowAlert"] != null)
+{
+    <script>alert('İlerleyebilmek için giriş yapmalısınız.');</script>
+}
+@model List<proje.Controllers.HastaModel>
+<style>
+
+    .modal-body-1 {
+        margin: 30px 0px 0px 30px;
+        float: left;
+        width: 50%;
+        height: 50%;
+        display: inline-block;
+        font-size: large;
+    }
+
+    .modal-body-2 {
+        margin: 10px 30px 0px 0px;
+        float: right;
+        width: 36%;
+        height: 36%;
+        display: inline-block;
+    }
+
+    #profilphoto {
+        width: 100%;
+        height: 100%;
+    }
+
+    .custom-table {
+        border-collapse: collapse;
+        width: 100%;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+        background-color: #fff;
+        
+    }
+
+        .custom-table th,
+        .custom-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            vertical-align: middle;
+        }
+
+        .custom-table th {
+            color: #333; 
+        }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        background-image: url('../../Images/background_image.jpg');
+        background-repeat: repeat;
+        background-size: auto;
+        font-family: Arial, sans-serif; 
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+        .pagination a {
+            padding: 10px;
+            margin: 0 5px;
+            width: 30px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            text-decoration: none;
+            color: black;
+        }
+
+            .pagination a.active {
+                background-color: #007bff;
+                color: white;
+                border: transparent;
+            }
+
+            .pagination a:hover {
+                border: transparent;
+                background-color: #ddd;
+            }
+
+    .durum-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+       
+    }
+        .durum-btn input[type="submit"] {
+            margin-right: 10px;
+            border: transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+            .durum-btn input[type="submit"].active {
+                color: white; 
+            }
+
+            .durum-btn input[type="submit"][disabled] {
+                background: transparent;
+                color: rgba(0, 0, 0, 0.5); 
+                cursor: not-allowed; 
+            }
+
+    .btn.active {
+        background: transparent;
+        visibility: visible;
+    }
+    .btn[disabled] {
+        visibility: unset;
+    }
+
+
+
+</style>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+
+    <table class="table table-striped custom-table table-hover" style="margin-top:40px;">
+        <caption style="color:white;">Hastalar Listesi</caption>
+        @using (Html.BeginForm("Index", "Revir", FormMethod.Get))
+        {
+            <thead class="table-warning">
+                <tr>
+                    <th scope="col" style="border: transparent;">
+                        <input type="text" class="form-control" placeholder="ID" name="id" value="@ViewBag.SelectedId" />
+                    </th>
+                    <th scope="col" style="border: transparent;">
+                        <input type="text" class="form-control" placeholder="Sicil No" name="sicilNo" value="@ViewBag.SelectedSicilno" />
+                    </th>
+                    <th scope="col" style="border: transparent;">
+                        <input type="text" class="form-control" placeholder="İsim" name="isim" value="@ViewBag.SelectedIsim" />
+                    </th>
+                    <th scope="col" style="border: transparent;">
+                        <input type="text" class="form-control" placeholder="Soyisim" name="soyisim" value="@ViewBag.SelectedSoyisim" />
+                    </th>
+                    <th scope="col" style="border: transparent;">
+                        <input type="text" class="form-control" placeholder="Yaka Kodu" name="yakakodu" value="@ViewBag.SelectedYakakodu" />
+                    </th>
+                    <th scope="col" style="border: transparent;">
+                        <select id="month" name="month" class="form-control">
+                            <option style="border-radius:12px; outline:none;" value="">Tüm Aylar</option>
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <option value="@i" @(ViewBag.SelectedMonth == i ? "selected" : "")>@i</option>
+                            }
+                        </select>
+                    </th>
+                    <th scope="col" style="border: transparent;">
+                        <div>
+                            
+                            <select style="border-radius: 9px;" name="sortOrder" id="sortOrder" onchange="this.form.submit()">
+                                <option value="">Sıralama seçiniz</option>
+                                <option value="id_desc" @(ViewBag.SortOrder == "id_desc" ? "selected" : "")>ID (Azalan)</option>
+                                <option value="sevk_tarihi" @(ViewBag.SortOrder == "sevk_tarihi" ? "selected" : "")>Sevk Tarihi (Artan)</option>
+                                <option value="sevk_tarihi_desc" @(ViewBag.SortOrder == "sevk_tarihi_desc" ? "selected" : "")>Sevk Tarihi (Azalan)</option>
+                                <option value="sevk_saati" @(ViewBag.SortOrder == "sevk_saati" ? "selected" : "")>Sevk Saati (Artan)</option>
+                                <option value="sevk_saati_desc" @(ViewBag.SortOrder == "sevk_saati_desc" ? "selected" : "")>Sevk Saati (Azalan)</option>
+
+                            </select>
+                        </div>
+
+                    </th>
+                    <th scope="col" style="border: transparent;">
+                        
+                        <input type="submit" class="btn btn-secondary btn-outline-success" style="margin-top:5px; width:100%; height: auto; medium; color: white; border-radius: 12px;" value="Filtrele" />
+                    </th>
+                    <th scope="col" style="border: transparent;">
+                        <input type="submit" class="btn btn-secondary btn-outline-success" style="margin-top:5px; width:100%;  height: auto; font-size:medium; color: white; border-radius: 12px;" value="Filtreleri Temizle" onclick="resetFilters()" />
+                        </th>
+
+                </tr>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Sicil No</th>
+                    <th scope="col">İsim</th>
+                    <th scope="col">Soyisim</th>
+                    <th scope="col">Yaka Kodu</th>
+                    <th scope="col">Sevk Tarihi</th>
+                    <th scope="col">Sevk Saati</th>
+                    <th scope="col">Dosyası</th>
+                    <th scope="col">Durum</th>
+
+                </tr>
+            </thead>
+        }
+        <tbody class="table-group-divider">
+            @foreach (var hasta in Model)
+            {
+                <tr>
+                    <th scope="row">@hasta.id</th>
+                    <th>@hasta.sicilno</th>
+                    <td>@hasta.isim</td>
+                    <td>@hasta.soyisim</td>
+                    <td>@hasta.yakakodu</td>
+                    <td>@(hasta.sevk_tarihi.HasValue ? hasta.sevk_tarihi.Value.ToString("dd/MM/yyyy") : "N/A")</td>
+                    <td>@(hasta.sevk_saati.HasValue ? hasta.sevk_saati.Value.ToString("HH:mm") : "N/A")</td>
+
+
+                    <td>
+                        <a href="#" class="detay-btn" data-sicilno="@hasta.sicilno" data-bs-toggle="modal" data-bs-target="#myModal-@hasta.sicilno">
+                            <img src="~/Images/modal_icon.png" style="height:30px; width:30px;" />
+                        </a>
+
+                        <div class="modal fade" id="myModal-@hasta.sicilno" tabindex="-1" role="dialog" aria-labelledby="amirModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="amirModalLabel">Detaylar</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="modal-body-1">
+                                            
+                                            <b>Sicil No:</b> <span id="modal-sicilno-@hasta.sicilno"></span><br>
+                                            <b>İsim:</b> <span id="modal-isim-@hasta.sicilno"></span><br>
+                                            <b>Soyisim:</b> <span id="modal-soyisim-@hasta.sicilno"></span><br>
+                                            <b>Telefon:</b> <span id="modal-tel-@hasta.sicilno"></span><br>
+                                            <b>Email:</b> <span id="modal-email-@hasta.sicilno"></span><br>
+                                            <b>Departman:</b> <span id="modal-departman-@hasta.sicilno"></span><br>
+                                            <b>Amirleri:</b> <span id="modal-amirleri-@hasta.sicilno"></span><br>
+
+                                        </div>
+                                        <div class="modal-body-2">
+                                            <img id="profilphoto" src="~/Images/vesika/@(hasta.sicilno).png" />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    
+                    <td>
+                        @*Kodların isimleri ters o yüzden ✔ ile ❌ yerleri değiştirildi kod doğru bir şekilde çalışıyor
+                         (anlam karmaşası yaşanırsa xButton <=> tickButton yapılabilir )*@
+                        <a class="durum-btn" style="align-items: center;">
+                            <input type="submit" value="✔" class="btn btn-success"
+                                   id="xButton-@hasta.id"
+                                   onclick="handleClick(this, 'tickButton-@hasta.id', @hasta.id, 0)"
+                                   @(hasta.durum == 0 ? "disabled" : "") /> <!-- Eğer durum 0 ise butonu pasif yapar (boolean mantığına göre böyle) -->
+
+                            <input type="submit" value="❌" class="btn btn-warning"
+                                   id="tickButton-@hasta.id"
+                                   onclick="handleClick(this, 'xButton-@hasta.id', @hasta.id, 1)"
+                                   @(hasta.durum == 1 ? "disabled" : "") /> <!-- Eğer durum 1 ise butonu aktif yapar -->
+
+                        </a>
+                    </td>
+                    
+
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+
+    
+
+    @*BURASI SAYFA DEĞİŞTİRME VE GÖRÜNECEK BİLGİLERİN SAYISININ AMİRCONTROLLERDAN ALINDIĞI YER*@
+    <div class="pagination pagination-sm">
+        @if (ViewBag.TotalCount > ViewBag.PageSize)
+        {
+            int totalPages = (int)Math.Ceiling((double)ViewBag.TotalCount / ViewBag.PageSize);
+
+            for (int i = 1; i <= totalPages; i++)
+            {
+                <a href="@Url.Action("Index", new { page = i, sicilNo = ViewBag.SelectedSicilno, isim = ViewBag.SelectedIsim, soyisim = ViewBag.SelectedSoyisim, yakakodu = ViewBag.SelectedYakakodu, month = ViewBag.SelectedMonth, sortOrder = ViewBag.SelectedSortOrder })"
+                   class="@(i == ViewBag.CurrentPage ? "active" : "")">
+                    @i
+                </a>
+            }
+        }
+    </div>
+
+    <br /><br />
+
+
+
+
+
+
+
+          <script>
+
+
+
+              $(document).ready(function () {
+                  // Filtreleri URL'den aldırıyorum
+                  const urlParams = new URLSearchParams(window.location.search);
+                  $('#sicilNo').val(urlParams.get('sicilNo'));
+                  $('#isim').val(urlParams.get('isim'));
+                  $('#soyisim').val(urlParams.get('soyisim'));
+                  $('#yakakodu').val(urlParams.get('yakakodu'));
+                  $('#month').val(urlParams.get('month'));
+                  $('#sortOrder').val(urlParams.get('sortOrder'));
+
+                  $('#sortOrder').change(function () {
+                      var selectedOrder = $(this).val();
+                      sortTable(selectedOrder);
+                  });
+
+                  function sortTable(order) {
+                      var table = $('#table');
+                      var rows = table.find('tbody tr').get();
+
+                      rows.sort(function (a, b) {
+                          var keyA, keyB;
+
+                          if (order === 'id_desc') {
+                              keyA = parseInt($(a).children('td').eq(0).text());
+                              keyB = parseInt($(b).children('td').eq(0).text());
+                              return keyB - keyA; 
+                          } else if (order === 'sevk_tarihi') {
+                              keyA = new Date($(a).children('td').eq(6).text()); 
+                              keyB = new Date($(b).children('td').eq(6).text());
+                              return keyA - keyB; 
+                          } else if (order === 'sevk_tarihi_desc') {
+                              keyA = new Date($(a).children('td').eq(6).text());
+                              keyB = new Date($(b).children('td').eq(6).text());
+                              return keyB - keyA; 
+                          }
+                          else if (order === 'sevk_saati') {
+                              keyA = new Date($(a).children('td').eq(7).text()); 
+                              keyB = new Date($(b).children('td').eq(7).text());
+                              return keyA - keyB; 
+                          } else if (order === 'sevk_saati_desc') {
+                              keyA = new Date($(a).children('td').eq(7).text());
+                              keyB = new Date($(b).children('td').eq(7).text());
+                              return keyB - keyA; 
+                          }
+                          return 0; 
+
+                      });
+
+                      $.each(rows, function (index, row) {
+                          table.children('tbody').append(row);
+                      });
+                  }
+              });
+
+
+
+
+
+
+
+                function handleClick(button, otherButtonId, id, durum) {
+                    button.classList.add('active'); 
+                    button.disabled = true; 
+
+                    const otherButton = document.getElementById(otherButtonId);
+                    otherButton.classList.remove('active'); 
+                    otherButton.disabled = false; 
+
+                    DurumGuncelle(id, durum); 
+                    alert("Hastanın Kayıt Durumu Değiştirildi");
+              }
+
+                function getHastaDurum(id) {
+                let durum = null; 
+
+            
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetHastaDurum", "Revir")', 
+                    data: { id: id },
+                    async: false, 
+                    success: function(response) {
+                        if (response.success) {
+                            durum = response.durum; 
+                            console.log("ID:" + id + " - Durum: " + durum);
+                        } else {
+                            console.error(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Hata: ' + error);
+                    }
+                });
+
+                return durum; 
+              }
+
+              window.onload = function () {
+                  document.querySelectorAll('.durum-btn input').forEach(button => {
+                      const id = button.id.split('-')[1]; 
+                      const durum = getHastaDurum(id); 
+
+                      // Duruma göre butonu ayarlayabiliyoruz (DURUM AKTİF / PASİF DÜZENLEMELERİ)
+                      if (durum == 1) {
+                          button.classList.add('active'); 
+                          document.getElementById('tickButton-' + id).disabled = true; 
+                          document.getElementById('xButton-' + id).disabled = false; 
+                      } else if (durum == 0) {
+                          button.classList.remove('active'); 
+                          document.getElementById('tickButton-' + id).disabled = false;
+                          document.getElementById('xButton-' + id).disabled = true; 
+                      }
+                  });
+              };
+
+
+
+
+
+
+            function DurumGuncelle(id, durum) {
+                const data = { id: id, durum: durum }; 
+                console.log("Gönderilen veri:", JSON.stringify(data)); 
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DurumGuncelle", "Revir")',
+                    contentType: "application/json", 
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        alert(response.message);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Bir hata oluştu: ' + error);
+                    }
+                });
+            }
+
+
+
+
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const myModal = new bootstrap.Modal(document.getElementById('amirModal'));
+            document.getElementById('amirkayit').addEventListener('click', function () {
+                myModal.show();
+            });
+        });
+
+    $(document).on('click', '.detay-btn', function () {
+    var sicilno = $(this).data('sicilno');
+        var url = '@Url.Action("HastaDetay", "Revir")';
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: { sicilno: sicilno },
+        success: function (response) {
+            if (response.success) {
+                $('#modal-sicilno-' + sicilno).text(response.data.sicilno);
+                $('#modal-isim-' + sicilno).text(response.data.isim);
+                $('#modal-soyisim-' + sicilno).text(response.data.soyisim);
+               /* $('#modal-tel-' + sicilno).text(response.data.tel);*/
+               /* $('#modal-email-' + sicilno).text(response.data.e_mail);*/
+                $('#modal-departman-' + sicilno).text(response.data.departman);
+                $('#modal-amirleri-' + sicilno).text(response.data.amirleri);
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            alert('Bir hata oluştu: ' + error);
+        }
+    });
+});
+          </script>
+
+@section Scripts {
+    <script>
+        function resetFilters() {
+            document.querySelector('input[name="id"]').value = '';
+            document.querySelector('input[name="sicilNo"]').value = '';
+            document.querySelector('input[name="isim"]').value = '';
+            document.querySelector('input[name="soyisim"]').value = '';
+            document.querySelector('input[name="yakakodu"]').value = '';
+            document.querySelector('select[name="month"]').selectedIndex = 0;
+            document.querySelector('form').submit();
+        }
+    </script>
+}
+
+</body>
+</html>

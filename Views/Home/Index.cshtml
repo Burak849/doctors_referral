@@ -1,0 +1,150 @@
+﻿@{
+    ViewData["Title"] = "Anasayfa";
+}
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-image: url('../../Images/background_image.jpg');
+        background-size: cover; 
+        background-position: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        /*height: 100vh;*/
+        /*margin-top: 90px;*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: column;
+    }
+
+    .container-content {
+        text-align: center;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: column;
+    }
+
+    .backgroundcontainer {
+        margin-top: 120px;
+        background-color: rgba(255, 255, 255, 0.9); 
+        border-radius: 15px; 
+        border-collapse: collapse;
+        overflow: hidden; 
+        box-shadow: 0 5px 8px rgba(0, 0, 0, 1);
+        padding: 25px;
+    }
+
+    h3 {
+        margin-top: 30px;
+        text-align: center;
+        color: black;
+        font-weight: 500;
+        font-family: serif;
+    }
+
+    .btn {
+        text-align: center;
+        padding: 10px;
+        margin: 10px;
+        height: 60px;
+        width: 500px;
+        font-size: 24px;
+        color: white;
+        border-radius: 10px;
+    }
+ 
+    hr{
+        margin: 10px 0;
+        border: 1px solid black;
+    }
+    
+    .mb-3 {
+        display: flex;
+        align-items: center; 
+        justify-content: space-between; 
+    }
+
+        .mb-3 label {
+            margin-right: 10px; 
+            min-width: 150px; 
+            text-align: right;
+        }
+
+        .mb-3 input {
+            flex-grow: 1; 
+        }
+
+</style>
+
+<div class="backgroundcontainer">
+    <h3><strong>Giriş Yapacağınız Paneli Seçiniz:</strong></h3>
+    <hr />
+
+    <div class="container">
+        <div class="container-content">
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#revirModal">
+                Revir Paneli
+            </button>
+
+            <div class="modal fade" id="revirModal" tabindex="-1" aria-labelledby="revirModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="margin-top: 120px;">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="revirModalLabel" style="color:black;"><strong>Revir Paneli</strong></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="@Url.Action("CheckSicilNo", "Revir")">
+                                <div class="mb-3" >
+                                    <label for="revirSicilno" class="col-form-label" style="color:black;">Revir Sicilno Giriniz:</label>
+                                    <input type="text" class="form-control" id="sicilno" name="sicilno" required>
+                                </div>
+                                <div class="modal-footer" style="flex-wrap: nowrap; align-items: center; justify-content:center;">
+                                    <input type="submit" class="btn btn-primary"value="Giriş Yap"/>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#amirModal">
+                Amir Paneli
+            </button>
+
+            <div class="modal fade" id="amirModal" tabindex="-1" aria-labelledby="amirModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content"style="margin-top: 120px;">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="amirModalLabel"style="color:black;"><strong>Amir Paneli</strong></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="@Url.Action("CheckSicilNo", "Amir")">
+                                <div class="mb-3">
+                                    <label for="amirSicilno" class="col-form-label" style="color:black;">Amir Sicilno Giriniz:</label>
+                                    <input type="text" class="form-control" id="amirSicilno" name="sicilno" required>
+                                </div>
+                                <div class="modal-footer"style="flex-wrap: nowrap; align-items: center; justify-content:center;">
+                                    <input type="submit" class="btn btn-primary" value="Giriş Yap" />
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

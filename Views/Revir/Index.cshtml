@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewData["Title"] = "Revir Formu"; 
+}
+
+<style>
+  
+
+    .custom-table {
+        border-collapse: collapse;
+        width: 100%; 
+        border-radius: 15px; /* Kenarları yuvarlaklaştırır */
+        overflow: hidden; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Gölge efekti */
+        background-color: #fff; 
+    }
+
+        .custom-table th,
+        .custom-table td {
+            padding: 12px; 
+            text-align: left; 
+            border-bottom: 1px solid #ddd; /* Alt kenar çizgisi */
+        }
+
+        .custom-table th {
+           
+            color: #333; /* Başlık metin rengi */
+        }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-image: url('../../Images/background_image.jpg');
+        background-size: cover; 
+        background-position: center; 
+        font-family: Arial, sans-serif; /* Yazı tipi */
+    }
+</style>
+<html>
+<body>
+
+   
+    <table class="table table-striped custom-table table-hover" style="margin-top:40px;">
+        <caption>Hastalar Listesi</caption>
+        <thead class="table-warning">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Sicil No</th>
+                <th scope="col">İsim</th>
+                <th scope="col">Soyisim</th>
+                <th scope="col">Sevk Tarihi</th>
+                <th scope="col">Sevk Saati</th>
+                <th scope="col">Dosyası</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var revir in Model) 
+            {
+                <tr>
+                    <th scope="row">@revir.id</th>
+                    <td>@revir.sicilno</td>
+                    <td>@revir.isim</td>
+                    <td>@revir.soyisim</td>
+                    <td>@revir.sevk_tarihi</td>
+                    <td>@revir.sevk_saati</td>
+                    <td>
+                        <!-- MODALIN IKONUNU BURDAN DEGISTIREBILIRSIN -->
+                        <a href="#" data-toggle="modal" data-target="#myModal-@revir.sicilno">
+                            <img src="~/Images/modal_icon.png" style="height:30px; width:30px;"/> 
+                        </a>
+
+                        
+                        <div class="modal fade" id="myModal-@revir.sicilno" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Detaylar</h5>
+                                        
+                                    </div>
+                                    <div class="modal-body">
+                                        <!--BURADA SIMDILIK BOYLE YAPTIM AJAX KULLANIMIYLA DUZENLEMEN GEREKIYOR-->
+                                        Profili: <br>
+                                        <div class="mb-2">
+                                            <label for="amirSicilno" class="col-form-label" style="color:black;">Çalışan SicilNo:@revir.sicilno</label>
+                                            <input type="text" class="form-control" id="amirSicilno" name="sicilno" required>
+                                        </div>
+                                        Sicil No: <br>
+                                        İsim: @revir.isim<br>
+                                        Soyisim: @revir.soyisim<br>
+                                        Telefon: <br>
+                                        E-mail: <br>
+                                        Departman: <br>
+                                        Amirleri: <br><br><br><br>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>

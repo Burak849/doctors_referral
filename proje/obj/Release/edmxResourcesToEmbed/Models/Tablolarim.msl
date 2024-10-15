@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="viziteModelStoreContainer" CdmEntityContainer="viziteEntities">
+    <EntitySetMapping Name="amirtabloes">
+      <EntityTypeMapping TypeName="viziteModel.amirtablo">
+        <MappingFragment StoreEntitySet="amirtablo">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sicilno" ColumnName="sicilno" />
+          <ScalarProperty Name="isim" ColumnName="isim" />
+          <ScalarProperty Name="soyisim" ColumnName="soyisim" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="yakakodu" ColumnName="yakakodu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="revirtabloes">
+      <EntityTypeMapping TypeName="viziteModel.revirtablo">
+        <MappingFragment StoreEntitySet="revirtablo">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sicilno" ColumnName="sicilno" />
+          <ScalarProperty Name="isim" ColumnName="isim" />
+          <ScalarProperty Name="soyisim" ColumnName="soyisim" />
+          <ScalarProperty Name="sevk_tarihi" ColumnName="sevk_tarihi" />
+          <ScalarProperty Name="sevk_saati" ColumnName="sevk_saati" />
+          <ScalarProperty Name="fotograf" ColumnName="fotograf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="doktortabloes">
+      <EntityTypeMapping TypeName="viziteModel.doktortablo">
+        <MappingFragment StoreEntitySet="doktortablo">
+          <ScalarProperty Name="doktor_soyad" ColumnName="doktor_soyad" />
+          <ScalarProperty Name="doktor_ad" ColumnName="doktor_ad" />
+          <ScalarProperty Name="doktor_sicilno" ColumnName="doktor_sicilno" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="kayitliamirtabloes">
+      <EntityTypeMapping TypeName="viziteModel.kayitliamirtablo">
+        <MappingFragment StoreEntitySet="kayitliamirtablo">
+          <ScalarProperty Name="amir_soyad" ColumnName="amir_soyad" />
+          <ScalarProperty Name="amir_ad" ColumnName="amir_ad" />
+          <ScalarProperty Name="amir_sicilno" ColumnName="amir_sicilno" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
